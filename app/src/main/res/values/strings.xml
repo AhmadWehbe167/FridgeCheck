@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">FridgeCheck</string>
+    <string name="home_title">Find Your Daily Grocery</string>
+    <string name="search_bar">Search your desired products...</string>
+    <string name="filter_desc">Filter</string>
+    <string name="general_desc">general_desc</string>
+    <string name="Categories">Categories</string>
+    <string name="Best_Selling">Best Selling</string>
+    <string name="Newest_items">Newest</string>
+    <string name="imported_items">Imported Items</string>
+    <string name="Breakfast">Breakfast</string>
+    <string name="Snacks">Snacks</string>
+    <string name="Beverages">Beverages</string>
+    <string name="Dairy">Dairy</string>
+    <string name="Fish">Fish</string>
+    <string name="Cake">Cake</string>
+    <string name="Biscuits">Biscuits</string>
+    <string name="Oranges">Oranges</string>
+    <string name="Lemon">Lemon</string>
+    <string name="Apple">Apple</string>
+    <string name="stock">stock</string>
+    <string name="two_hundred">200</string>
+    <string name="heart">heart</string>
+    <string name="twenty_thou">20,000 L.L.</string>
+</resources>
