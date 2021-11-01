@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FridgeCheck">
-        <activity android:name=".CategoryPage"></activity>
+        <activity android:name=".Login"></activity>
+        <activity android:name=".CategoryPage" />
+        <activity
+            android:name=".PopCall"
+            android:theme="@style/Theme.Customtheme" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,6 +21,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".itemsPageAdm" />
+        <activity android:name=".itemsPage" />
+        <activity android:name=".editItems" />
+        <activity android:name=".addItem" />
+        <activity android:name=".About" />
+        <activity android:name=".Profile" />
+        <activity android:name=".Settings" />
+        <activity android:name=".Register" />
     </application>
 
 </manifest>

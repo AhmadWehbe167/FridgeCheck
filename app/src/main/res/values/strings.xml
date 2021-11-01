@@ -38,4 +38,64 @@
     <string name="protein">Protein</string>
     <string name="bread">Bread</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile">Profile</string>
+    <string name="call_us">Call Us</string>
+
+    <string name="about_our_app">About our app</string>
+
+    <string name="log_out">Log out</string>
+
+    <string name="name">Name</string>
+
+    <string name="username">Username</string>
+
+    <string name="e_mail">E-mail</string>
+
+    <string name="callOn">Call us on \n 76789101</string>
+
+    <string name="about_us">About Us</string>
+
+    <string name="your">Your online supermarket.</string>
+
+    <string name="shop">Shop fresh. Shop different.</string>
+
+    <string name="alltext">Why go to the supermarket when the supermarket can come to you? Browse and shop from thousands of items through markit. From freshly baked morning breads, to late night chocolate cravings, you’ll get it all covered with just a few clicks.</string>
+
+    <string name="password">Password</string>
+
+    <string name="sign_in">SIGN IN</string>
+
+    <string name="noaccount">Don\'t have an account?</string>
+
+    <string name="register_here">Register here!</string>
+
+    <string name="login">Login</string>
+
+    <string name="register">REGISTER</string>
+
+    <string name="confirm_password">Confirm Password</string>
+
+    <string name="already">Already have an account?</string>
+
+    <string name="log_in2">Log In!</string>
+
+    <string name="reeses">Reeses Chocolate</string>
+
+    <string name="price">LBP 17,000</string>
+
+    <string name="toblerone">Toblerone</string>
+
+    <string name="tobleroneprice">LBP 15,000</string>
+
+    <string name="lindt">Lindt Lindor</string>
+
+    <string name="lindtprice">LBP 95,000</string>
+
+    <string name="snickers">Snickers</string>
+
+    <string name="snickersprice">LBP 8,500</string>
+
+    <string name="description">42g - 2 cups</string>
+
+    <string name="quantity">Quantity: 57</string>
 </resources>

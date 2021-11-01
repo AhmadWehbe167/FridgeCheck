@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Profile">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/greyish">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/blue"
+            android:layout_height="49dp">
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="10dp"
+                android:layout_height="37dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="@color/blue"
+                app:srcCompat="@drawable/back_arrow"
+                tools:ignore="VectorDrawableCompat" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="313dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/blue"
+                android:gravity="center|left|left"
+                android:text="@string/profile"
+                android:textColor="@color/white"
+                android:textSize="26dp" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="35dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="221dp"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView13"
+                android:layout_width="match_parent"
+                android:layout_height="202dp"
+                app:srcCompat="@drawable/logo" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+
+            android:layout_height="46dp" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:background="@color/white"
+            android:textColor="@color/Navyblue"
+            android:gravity="center|left|left"
+            android:layout_marginLeft="15dp"
+            android:text="@string/name"
+            android:textSize="30dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="21dp" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@color/white"
+            android:gravity="center|left|left"
+            android:layout_marginLeft="15dp"
+            android:text="@string/username"
+            android:textColor="@color/Navyblue"
+            android:textSize="18dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="18dp" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@color/white"
+            android:gravity="center|left|left"
+            android:layout_marginLeft="15dp"
+            android:text="@string/e_mail"
+            android:textColor="@color/Navyblue"
+            android:textSize="18dp" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
