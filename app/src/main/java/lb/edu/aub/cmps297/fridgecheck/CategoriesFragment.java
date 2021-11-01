@@ -1,5 +1,7 @@
 package lb.edu.aub.cmps297.fridgecheck;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +62,18 @@ public class CategoriesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_categories, container, false);
+        View view = inflater.inflate(R.layout.fragment_categories, container, false);
+        ImageView categoryItem = (ImageView) view.findViewById(R.id.categoryBread);
+        categoryItem.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View arg0) {
+                        Intent intent = new Intent(getActivity(), CategoryPage.class);
+                        startActivity(intent);
+                        ((Activity) getActivity()).overridePendingTransition(0, 0);
+                    }
+                }
+        );
+        return view;
     }
 }

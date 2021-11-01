@@ -4,7 +4,6 @@
     <string name="search_bar">Search your desired products...</string>
     <string name="filter_desc">Filter</string>
     <string name="general_desc">general_desc</string>
-    <string name="Categories">Categories</string>
     <string name="wishlist">WishList</string>
     <string name="settings">Settings</string>
     <string name="Best_Selling">Best Selling</string>
@@ -24,6 +23,19 @@
     <string name="two_hundred">200</string>
     <string name="heart">heart</string>
     <string name="twenty_thou">20,000 L.L.</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="breakfast">Breakfast</string>
+    <string name="snacks">snacks</string>
+    <string name="Categories">Categories</string>
+    <string name="left_arrow">left arrow</string>
+    <string name="lunch">Lunch</string>
+    <string name="beverages">Beverages</string>
+    <string name="dairy">Dairy</string>
+    <string name="seafood">SeaFood</string>
+    <string name="cakes">Cakes</string>
+    <string name="biscuits">Biscuits</string>
+    <string name="vegetables">Vegetables</string>
+    <string name="fruits">Fruits</string>
+    <string name="protein">Protein</string>
+    <string name="bread">Bread</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
