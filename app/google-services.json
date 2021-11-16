@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "58176853827",
+    "project_id": "fridgecheck-31bca",
+    "storage_bucket": "fridgecheck-31bca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58176853827:android:93a8171ca9618761a141f6",
+        "android_client_info": {
+          "package_name": "lb.edu.aub.cmps297.fridgecheck"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "58176853827-pvmo87j9oo41pe9pikt91rmu8jr47lo3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "lb.edu.aub.cmps297.fridgecheck",
+            "certificate_hash": "6b2d8e16f404642c4316a22faf7306d313591279"
+          }
+        },
+        {
+          "client_id": "58176853827-tg9af8bqgh02atr6h7mt5fgavjfn4tqq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMMLsXpirGUVBmSSux-PjH_urk0Fzv1RU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "58176853827-tg9af8bqgh02atr6h7mt5fgavjfn4tqq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
