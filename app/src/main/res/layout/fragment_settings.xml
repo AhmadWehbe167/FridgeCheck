@@ -77,6 +77,43 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView20"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="@color/white"
+                app:srcCompat="@drawable/ic_heart"
+                tools:ignore="VectorDrawableCompat" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="238dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:gravity="center|left|left"
+                android:text="@string/wishlist"
+                android:textColor="@color/Navyblue"
+                android:textSize="25dp" />
+
+            <ImageView
+                android:id="@+id/imageView30"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                app:srcCompat="@drawable/ic_forward"
+                tools:ignore="VectorDrawableCompat" />
+
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"

@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 public class Settings extends AppCompatActivity {
 
@@ -24,12 +22,14 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_settings);
-        logout = findViewById(R.id.button);
+
         back = findViewById(R.id.imageView12);
         profile = findViewById(R.id.imageView3);
         call = findViewById(R.id.imageView7);
-        about = findViewById(R.id.imageView9);
         wishlist = findViewById(R.id.imageView5);
+        about = findViewById(R.id.imageView9);
+
+        logout = findViewById(R.id.register);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,7 +89,7 @@ public class Settings extends AppCompatActivity {
         startActivity(intent);
     }
     public void openWishList(){
-        Intent intent = new Intent(this, WishlistFragment.class);
+        Intent intent = new Intent(this, wishList.class);
         startActivity(intent);
     }
 }
