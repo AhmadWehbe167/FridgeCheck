@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Settings extends AppCompatActivity {
 
     private Button logout;
@@ -16,6 +18,7 @@ public class Settings extends AppCompatActivity {
     private ImageView call;
     private ImageView about;
     private ImageView wishlist;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +32,7 @@ public class Settings extends AppCompatActivity {
         wishlist = findViewById(R.id.imageView5);
         about = findViewById(R.id.imageView9);
 
-        logout = findViewById(R.id.register);
+        logout = findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +72,8 @@ public class Settings extends AppCompatActivity {
         });
     }
     public void openLogout(){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, Login.class);
+        mAuth.signOut();
         startActivity(intent);
     }
     public void openBack(){

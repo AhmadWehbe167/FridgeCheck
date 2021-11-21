@@ -65,46 +65,57 @@
 
             android:layout_height="46dp" />
 
-        <TextView
-            android:id="@+id/textView10"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="62dp"
-            android:background="@color/white"
-            android:textColor="@color/Navyblue"
-            android:gravity="center|left|left"
-            android:layout_marginLeft="15dp"
-            android:text="@string/name"
-            android:textSize="30dp" />
+            android:layout_height="match_parent">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="21dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:background="@color/white"
-            android:gravity="center|left|left"
-            android:layout_marginLeft="15dp"
-            android:text="@string/username"
-            android:textColor="@color/Navyblue"
-            android:textSize="18dp" />
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="match_parent"
+                    android:layout_height="62dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@color/white"
+                    android:gravity="center|left|left"
+                    android:text="@string/name"
+                    android:textColor="@color/Navyblue"
+                    android:textSize="30dp" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="18dp" />
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="21dp" />
 
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:background="@color/white"
-            android:gravity="center|left|left"
-            android:layout_marginLeft="15dp"
-            android:text="@string/e_mail"
-            android:textColor="@color/Navyblue"
-            android:textSize="18dp" />
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@color/white"
+                    android:gravity="center|left|left"
+                    android:text="@string/username"
+                    android:textColor="@color/Navyblue"
+                    android:textSize="18dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@color/white"
+                    android:gravity="center|left|left"
+                    android:text="@string/e_mail"
+                    android:textColor="@color/Navyblue"
+                    android:textSize="18dp" />
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

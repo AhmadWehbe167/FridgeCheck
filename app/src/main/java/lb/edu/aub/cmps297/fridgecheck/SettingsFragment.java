@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SettingsFragment#newInstance} factory method to
@@ -54,6 +56,7 @@ public class SettingsFragment extends Fragment {
     private ImageView profile;
     private ImageView call;
     private ImageView about;
+    private FirebaseAuth mAuth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,11 +77,12 @@ public class SettingsFragment extends Fragment {
         profile =(ImageView) view.findViewById(R.id.imageView3);
         call = (ImageView) view.findViewById(R.id.imageView7);
         about =(ImageView) view.findViewById(R.id.imageView9);
-
+        mAuth = FirebaseAuth.getInstance();
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), Register.class);
+                mAuth.signOut();
+                Intent intent = new Intent(getActivity(), Login.class);
                 startActivity(intent);
                 ((Activity) getActivity()).overridePendingTransition(0, 0);
             }

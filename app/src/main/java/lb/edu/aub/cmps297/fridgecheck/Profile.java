@@ -25,7 +25,7 @@ public class Profile extends AppCompatActivity {
         });
     }
     public void openBack(){
-        Intent intent = new Intent(this, Settings.class);
+        Intent intent = new Intent(this, SettingsFragment.class);
         startActivity(intent);
     }
 }
