@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="53dp"
             android:background="@color/blue">
-
+<!--
             <ImageView
                 android:id="@+id/imageView12"
                 android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
                 android:layout_weight="1"
                 android:background="@color/blue"
                 app:srcCompat="@drawable/back_arrow"
-                tools:ignore="VectorDrawableCompat" />
+                tools:ignore="VectorDrawableCompat" />-->
 
             <TextView
                 android:id="@+id/textView7"
@@ -37,7 +37,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/blue"
-                android:gravity="center|left|left"
+                android:gravity="center"
                 android:text="@string/about_us"
                 android:textColor="@color/white"
                 android:textSize="26dp" />

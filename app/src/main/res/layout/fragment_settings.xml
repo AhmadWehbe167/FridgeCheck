@@ -28,23 +28,24 @@
 
                 <TextView
                     android:id="@+id/textView7"
-                    android:layout_width="313dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/blue"
-                    android:gravity="center|left|left"
+                    android:gravity="center"
                     android:text="@string/settings"
                     android:textColor="@color/white"
-                    android:textSize="26dp" />
+                    android:textSize="26sp" />
             </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="31dp" />
+                android:layout_height="70dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
+                android:id="@+id/imageView3"
                 android:background="@color/white"
                 android:orientation="horizontal">
 
@@ -67,29 +68,25 @@
                     android:gravity="center|left|left"
                     android:text="@string/profile"
                     android:textColor="@color/Navyblue"
-                    android:textSize="25dp" />
+                    android:textSize="25sp" />
 
-                <ImageView
-                    android:id="@+id/imageView3"
+<!--                <ImageView
+
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/white"
                     app:srcCompat="@drawable/ic_forward"
-                    tools:ignore="VectorDrawableCompat" />
+                    tools:ignore="VectorDrawableCompat" />-->
 
             </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="10dp" />
-
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="23dp" />
+                android:layout_height="20dp" />
 
             <LinearLayout
+                android:id="@+id/imageView7"
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:background="@color/white"
@@ -116,22 +113,22 @@
                     android:textColor="@color/Navyblue"
                     android:textSize="25dp" />
 
-                <ImageView
-                    android:id="@+id/imageView7"
+            <!--    <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/white"
                     app:srcCompat="@drawable/ic_forward"
-                    tools:ignore="VectorDrawableCompat" />
+                    tools:ignore="VectorDrawableCompat" />-->
 
             </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="10dp" />
+                android:layout_height="20dp" />
 
             <LinearLayout
+                android:id="@+id/imageView9"
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:background="@color/white"
@@ -158,20 +155,21 @@
                     android:textColor="@color/Navyblue"
                     android:textSize="25dp" />
 
+<!--
                 <ImageView
-                    android:id="@+id/imageView9"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/white"
                     app:srcCompat="@drawable/ic_forward"
                     tools:ignore="VectorDrawableCompat" />
+-->
 
             </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="69dp" />
+                android:layout_height="70dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -17,13 +17,13 @@ public class About extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_about);
 
-        back = findViewById(R.id.imageView12);
+        /*back = findViewById(R.id.imageView12);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openBack();
             }
-        });
+        });*/
     }
     public void openBack(){
         Intent intent = new Intent(this, SettingsFragment.class);
