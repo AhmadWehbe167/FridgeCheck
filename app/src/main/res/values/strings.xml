@@ -98,4 +98,5 @@
     <string name="description">42g - 2 cups</string>
 
     <string name="quantity">Quantity: 57</string>
+    <string name="back_to_settings">back to settings</string>
 </resources>

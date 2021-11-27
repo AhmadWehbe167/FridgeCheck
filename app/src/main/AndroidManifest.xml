@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FridgeCheck">
-        <activity android:name=".wishList"></activity>
+        <activity android:name=".wishList">
+        </activity>
         <activity android:name=".Login" />
         <activity android:name=".CategoryPage" />
         <activity
