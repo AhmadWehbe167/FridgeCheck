@@ -1,13 +1,17 @@
 package lb.edu.aub.cmps297.fridgecheck;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,12 +19,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +49,12 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    RecyclerView recyclerView;
+    ArrayList<Item> itemArrayList;
+    ItemAdapter itemAdapter;
+    FirebaseFirestore db;
+    ProgressDialog progressDialog;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -73,6 +90,11 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Fetching Data ...");
+        progressDialog.show();
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
@@ -87,28 +109,42 @@ public class HomeFragment extends Fragment {
             }
         }
         );
+        return view;
+    }
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("Items").document("LNAV1elbKyr0Ghsaq5Vs");
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        recyclerView = getView().findViewById(R.id.recyclerview);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        db = FirebaseFirestore.getInstance();
+        itemArrayList = new ArrayList<Item>();
+        itemAdapter = new ItemAdapter(getActivity(),itemArrayList);
+        recyclerView.setAdapter(itemAdapter);
+        EventChangeListener();
+    }
+
+    private void EventChangeListener() {
+        db.collection("Items").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        System.out.println("doc exists");
-                        System.out.println(document.getString("itemName"));
-                        System.out.println(document.get("price"));
-                        System.out.println(document.getString("Type"));
-                    } else {
-                        System.out.println("doc does not exists");
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(error != null){
+                    if(progressDialog.isShowing())
+                        progressDialog.dismiss();
+                    Log.e("Firestore error", error.getMessage());
+                    return;
+                }
+                for(DocumentChange dc : value.getDocumentChanges()){
+                    if(dc.getType() == DocumentChange.Type.ADDED){
+                        itemArrayList.add(dc.getDocument().toObject(Item.class));
                     }
-                } else {
-                    System.out.println("doc failed");
+                    itemAdapter.notifyDataSetChanged();
+                    if(progressDialog.isShowing())
+                        progressDialog.dismiss();
                 }
             }
         });
-
-        return view;
     }
 }
