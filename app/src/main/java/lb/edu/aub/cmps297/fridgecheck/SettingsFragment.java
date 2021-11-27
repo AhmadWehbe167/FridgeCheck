@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -53,9 +54,9 @@ public class SettingsFragment extends Fragment {
     }
 
     private Button logout;
-    private ImageView profile;
-    private ImageView call;
-    private ImageView about;
+    private LinearLayout profile;
+    private LinearLayout call;
+    private LinearLayout about;
     private FirebaseAuth mAuth;
 
     @Override
@@ -74,9 +75,9 @@ public class SettingsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
         logout =(Button) view.findViewById(R.id.logout);
-        profile =(ImageView) view.findViewById(R.id.imageView3);
-        call = (ImageView) view.findViewById(R.id.imageView7);
-        about =(ImageView) view.findViewById(R.id.imageView9);
+        profile =(LinearLayout) view.findViewById(R.id.imageView3);
+        call = (LinearLayout) view.findViewById(R.id.imageView7);
+        about =(LinearLayout) view.findViewById(R.id.imageView9);
         mAuth = FirebaseAuth.getInstance();
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
