@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
+            android:id="@+id/backcategory"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginStart="15dp"
@@ -63,7 +64,7 @@
                 android:columnCount="2">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="145dp"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="40dp"
@@ -74,7 +75,7 @@
                     app:cardPreventCornerOverlap="true">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="220dp"
                         android:layout_height="220dp"
                         android:orientation="vertical">
 
@@ -104,7 +105,7 @@
 
                                 <TextView
                                     android:id="@+id/Oranges"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/Oranges"
                                     android:textColor="#000000"
@@ -117,7 +118,7 @@
 
                                     <TextView
                                         android:id="@+id/stock"
-                                        android:layout_width="match_parent"
+                                        android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginEnd="5dp"
                                         android:text="@string/stock"
@@ -135,7 +136,7 @@
 
                                 <TextView
                                     android:id="@+id/orangesPrice"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/twenty_thou"
                                     android:textColor="#55CCFF"
@@ -147,6 +148,7 @@
                                 android:id="@+id/favourite"
                                 style="@style/heartStyle"
                                 android:layout_weight="0.5"
+                                android:layout_marginLeft="-300dp"
                                 android:contentDescription="@string/heart"
                                 app:srcCompat="@drawable/ic_baseline_empty_heart" />
 
@@ -156,7 +158,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="145dp"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="40dp"
@@ -247,7 +249,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="145dp"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="40dp"
@@ -338,7 +340,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="145dp"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="40dp"
@@ -431,7 +433,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="145dp"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="27dp"
                     android:layout_marginTop="40dp"
