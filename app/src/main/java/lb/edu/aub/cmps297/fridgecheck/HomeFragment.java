@@ -2,13 +2,11 @@ package lb.edu.aub.cmps297.fridgecheck;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,15 +15,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -50,9 +42,15 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    RecyclerView recyclerView;
-    ArrayList<Item> itemArrayList;
-    ItemAdapter itemAdapter;
+    RecyclerView newestRecyclerView;
+    RecyclerView bestRecyclerView;
+    RecyclerView importRecyclerView;
+    ArrayList<Item> newItemArrayList;
+    ArrayList<Item> bestItemArrayList;
+    ArrayList<Item> importItemArrayList;
+    ItemAdapter newItemAdapter;
+    ItemAdapter bestItemAdapter;
+    ItemAdapter importitemAdapter;
     FirebaseFirestore db;
     ProgressDialog progressDialog;
 
@@ -109,20 +107,41 @@ public class HomeFragment extends Fragment {
             }
         }
         );
+
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView = getView().findViewById(R.id.recyclerview);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        newestRecyclerView = getView().findViewById(R.id.recyclerview);
+        bestRecyclerView = getView().findViewById(R.id.bestrecyclerview);
+        importRecyclerView = getView().findViewById(R.id.importrecyclerview);
+
+        newestRecyclerView.setHasFixedSize(true);
+        bestRecyclerView.setHasFixedSize(true);
+        importRecyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager horizontalLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager horizontalLayoutManager3 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        newestRecyclerView.setLayoutManager(horizontalLayoutManager);
+        bestRecyclerView.setLayoutManager(horizontalLayoutManager2);
+        importRecyclerView.setLayoutManager(horizontalLayoutManager3);
 
         db = FirebaseFirestore.getInstance();
-        itemArrayList = new ArrayList<Item>();
-        itemAdapter = new ItemAdapter(getActivity(),itemArrayList);
-        recyclerView.setAdapter(itemAdapter);
+        newItemArrayList = new ArrayList<Item>();
+        bestItemArrayList = new ArrayList<Item>();
+        importItemArrayList = new ArrayList<Item>();
+
+        newItemAdapter = new ItemAdapter(getActivity(),newItemArrayList);
+        bestItemAdapter = new ItemAdapter(getActivity(),bestItemArrayList);
+        importitemAdapter = new ItemAdapter(getActivity(),importItemArrayList);
+
+        newestRecyclerView.setAdapter(newItemAdapter);
+        bestRecyclerView.setAdapter(bestItemAdapter);
+        importRecyclerView.setAdapter(importitemAdapter);
+
         EventChangeListener();
     }
 
@@ -137,10 +156,18 @@ public class HomeFragment extends Fragment {
                     return;
                 }
                 for(DocumentChange dc : value.getDocumentChanges()){
-                    if(dc.getType() == DocumentChange.Type.ADDED){
-                        itemArrayList.add(dc.getDocument().toObject(Item.class));
+                    System.out.println("type is: " + dc.getDocument().get("Type"));
+                    System.out.println("value is: " + dc.getDocument().get("Type").equals("Newest"));
+                    if(dc.getType() == DocumentChange.Type.ADDED  && dc.getDocument().get("Type").equals("Newest") && newItemArrayList.size() < 5){
+                        newItemArrayList.add(dc.getDocument().toObject(Item.class));
+                    }else if(dc.getType() == DocumentChange.Type.ADDED && dc.getDocument().get("Type").equals("BestSelling") && bestItemArrayList.size() < 5){
+                        bestItemArrayList.add(dc.getDocument().toObject(Item.class));
+                    }else if(dc.getType() == DocumentChange.Type.ADDED && dc.getDocument().get("Type").equals("Imported") && importItemArrayList.size() < 5){
+                        importItemArrayList.add(dc.getDocument().toObject(Item.class));
                     }
-                    itemAdapter.notifyDataSetChanged();
+                    newItemAdapter.notifyDataSetChanged();
+                    bestItemAdapter.notifyDataSetChanged();
+                    importitemAdapter.notifyDataSetChanged();
                     if(progressDialog.isShowing())
                         progressDialog.dismiss();
                 }
