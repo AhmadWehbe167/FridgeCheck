@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -45,12 +46,15 @@ public class HomeFragment extends Fragment {
     RecyclerView newestRecyclerView;
     RecyclerView bestRecyclerView;
     RecyclerView importRecyclerView;
+
     ArrayList<Item> newItemArrayList;
     ArrayList<Item> bestItemArrayList;
     ArrayList<Item> importItemArrayList;
+
     ItemAdapter newItemAdapter;
     ItemAdapter bestItemAdapter;
     ItemAdapter importitemAdapter;
+
     FirebaseFirestore db;
     ProgressDialog progressDialog;
 
@@ -96,16 +100,90 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        ImageView categoryItem = (ImageView) view.findViewById(R.id.breadImage);
-        categoryItem.setOnClickListener(
+        LinearLayout breakfastCategoryItem = (LinearLayout) view.findViewById(R.id.breakfastCard);
+        LinearLayout snacksCategoryItem = (LinearLayout) view.findViewById(R.id.SnacksCard);
+        LinearLayout beveragesfastCategoryItem = (LinearLayout) view.findViewById(R.id.BeveragesCard);
+        LinearLayout dairyCategoryItem = (LinearLayout) view.findViewById(R.id.DairyCard);
+        LinearLayout fishCategoryItem = (LinearLayout) view.findViewById(R.id.FishCard);
+        LinearLayout cakeCategoryItem = (LinearLayout) view.findViewById(R.id.CakeCard);
+        LinearLayout biscuitsCategoryItem = (LinearLayout) view.findViewById(R.id.BiscuitsCard);
+
+        breakfastCategoryItem.setOnClickListener(
                 new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(getActivity(), CategoryPage.class);
+                intent.putExtra("category","Breakfast");
                 startActivity(intent);
                 ((Activity) getActivity()).overridePendingTransition(0, 0);
             }
         }
+        );
+        snacksCategoryItem.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View arg0) {
+                        Intent intent = new Intent(getActivity(), CategoryPage.class);
+                        intent.putExtra("category","Snacks");
+                        startActivity(intent);
+                        ((Activity) getActivity()).overridePendingTransition(0, 0);
+                    }
+                }
+        );
+        beveragesfastCategoryItem.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View arg0) {
+                        Intent intent = new Intent(getActivity(), CategoryPage.class);
+                        intent.putExtra("category","Beverages");
+                        startActivity(intent);
+                        ((Activity) getActivity()).overridePendingTransition(0, 0);
+                    }
+                }
+        );
+        dairyCategoryItem.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View arg0) {
+                        Intent intent = new Intent(getActivity(), CategoryPage.class);
+                        intent.putExtra("category","Dairy");
+                        startActivity(intent);
+                        ((Activity) getActivity()).overridePendingTransition(0, 0);
+                    }
+                }
+        );
+        fishCategoryItem.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View arg0) {
+                        Intent intent = new Intent(getActivity(), CategoryPage.class);
+                        intent.putExtra("category","Fish");
+                        startActivity(intent);
+                        ((Activity) getActivity()).overridePendingTransition(0, 0);
+                    }
+                }
+        );
+        cakeCategoryItem.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View arg0) {
+                        Intent intent = new Intent(getActivity(), CategoryPage.class);
+                        intent.putExtra("category","Cake");
+                        startActivity(intent);
+                        ((Activity) getActivity()).overridePendingTransition(0, 0);
+                    }
+                }
+        );
+        biscuitsCategoryItem.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View arg0) {
+                        Intent intent = new Intent(getActivity(), CategoryPage.class);
+                        intent.putExtra("category","Biscuits");
+                        startActivity(intent);
+                        ((Activity) getActivity()).overridePendingTransition(0, 0);
+                    }
+                }
         );
 
         return view;
@@ -156,8 +234,6 @@ public class HomeFragment extends Fragment {
                     return;
                 }
                 for(DocumentChange dc : value.getDocumentChanges()){
-                    System.out.println("type is: " + dc.getDocument().get("Type"));
-                    System.out.println("value is: " + dc.getDocument().get("Type").equals("Newest"));
                     if(dc.getType() == DocumentChange.Type.ADDED  && dc.getDocument().get("Type").equals("Newest") && newItemArrayList.size() < 5){
                         newItemArrayList.add(dc.getDocument().toObject(Item.class));
                     }else if(dc.getType() == DocumentChange.Type.ADDED && dc.getDocument().get("Type").equals("BestSelling") && bestItemArrayList.size() < 5){
