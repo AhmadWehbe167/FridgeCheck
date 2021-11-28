@@ -33,7 +33,7 @@ public class itemsPage extends AppCompatActivity {
         });
     }
     public void openBack(){
-        Intent intent = new Intent(this, itemsPageAdm.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
     public void openWish(){

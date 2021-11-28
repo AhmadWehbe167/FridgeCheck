@@ -6,11 +6,15 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -21,6 +25,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 public class CategoryPage extends AppCompatActivity {
+    private ImageButton back;  
     RecyclerView recyclerView;
     ArrayList<Item> arrayList;
     ItemAdapter itemAdapter;
@@ -34,6 +39,7 @@ public class CategoryPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_category_page);
+      
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             category = extras.getString("category");
@@ -60,6 +66,19 @@ public class CategoryPage extends AppCompatActivity {
         recyclerView.setAdapter(itemAdapter);
 
         EventChangeListener();
+        
+        back = findViewById(R.id.backcategory);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openHome();
+            }
+        });
+    }
+  
+    private void openHome() {
+        Intent intent = new Intent(this, HomeFragment.class);
+        startActivity(intent);
 
     }
 
@@ -83,5 +102,6 @@ public class CategoryPage extends AppCompatActivity {
                 }
             }
         });
+
     }
 }

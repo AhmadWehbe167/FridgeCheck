@@ -18,13 +18,13 @@ public class wishList extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openSettings();
+                openHome();
             }
         });
     }
 
-    private void openSettings() {
-        Intent intent = new Intent(this, Settings.class);
+    private void openHome() {
+        Intent intent = new Intent(this, HomeFragment.class);
         startActivity(intent);
     }
 }

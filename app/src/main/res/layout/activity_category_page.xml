@@ -22,7 +22,30 @@
         app:layout_constraintBottom_toTopOf="@id/cardView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/backcategory"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/back_arrow"
+            tools:layout_gravity="center">
+
+        </ImageButton>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="90dp"
+            android:gravity="center"
+            android:text="@string/fruits"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
