@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,16 +46,17 @@ public class Profile extends AppCompatActivity {
         TextView displayEmail = (TextView) findViewById(R.id.textView9);
         displayEmail.setText(userEmail);
 
-/*        db.collection("Users").whereEqualTo("uId",id).get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (DocumentSnapshot document : task.getResult())
-                        displayName.setText((CharSequence) document.get("Name"));
-            }
-        }});
-        System.out.println(displayName);*/
+
+//      db.collection("Users").whereEqualTo("uId",id).get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    for (DocumentSnapshot document : task.getResult())
+//                        displayName.setText((CharSequence) document.get("Name"));
+//            }
+//        }});
+//        System.out.println(displayName);
     }
     public void openBack(){
         Intent intent = new Intent(this, SettingsFragment.class);
