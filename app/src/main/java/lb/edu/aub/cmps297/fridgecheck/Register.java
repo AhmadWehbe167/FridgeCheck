@@ -51,7 +51,7 @@ public class Register extends AppCompatActivity {
             createUser();
         });
         login.setOnClickListener(view -> {
-            startActivity(new Intent(Register .this, HomeFragment.class));
+            startActivity(new Intent(Register .this, MainActivity.class));
         });
     }
 
@@ -84,6 +84,7 @@ public class Register extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         // message to user
+                        startActivity(new Intent(Register.this, MainActivity.class));
                         Toast.makeText(Register.this, "Registered Successfully!", Toast.LENGTH_SHORT).show();
                         // get database and user id
                         FirebaseFirestore db = FirebaseFirestore.getInstance();
