@@ -2,6 +2,7 @@ package lb.edu.aub.cmps297.fridgecheck;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -63,17 +64,88 @@ public class CategoriesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_categories, container, false);
-        ImageView categoryItem = (ImageView) view.findViewById(R.id.categoryBread);
-        categoryItem.setOnClickListener(
+        ImageView Breakfast = (ImageView) view.findViewById(R.id.categoryBread);
+        ImageView Snacks = (ImageView) view.findViewById(R.id.snacks);
+        ImageView Beverages = (ImageView) view.findViewById(R.id.beverages);
+        ImageView Fish = (ImageView) view.findViewById(R.id.fish);
+        ImageView Dairy = (ImageView) view.findViewById(R.id.dairy);
+        ImageView Cake = (ImageView) view.findViewById(R.id.cake);
+        ImageView Biscuits =(ImageView) view.findViewById(R.id.biscuits);
+        ImageView Fruits = (ImageView) view.findViewById(R.id.fruits);
+        Breakfast.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View arg0) {
                         Intent intent = new Intent(getActivity(), CategoryPage.class);
+                        intent.putExtra("category","Breakfast");
                         startActivity(intent);
                         ((Activity) getActivity()).overridePendingTransition(0, 0);
                     }
                 }
         );
+        Snacks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CategoryPage.class);
+                intent.putExtra("category","Snacks");
+                startActivity(intent);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
+            }
+        });
+        Beverages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CategoryPage.class);
+                intent.putExtra("category","Beverages");
+                startActivity(intent);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
+            }
+        });
+        Fish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CategoryPage.class);
+                intent.putExtra("category","Fish");
+                startActivity(intent);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
+            }
+        });
+        Dairy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CategoryPage.class);
+                intent.putExtra("category","Dairy");
+                startActivity(intent);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
+            }
+        });
+        Cake.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CategoryPage.class);
+                intent.putExtra("category","Cake");
+                startActivity(intent);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
+            }
+        });
+        Biscuits.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CategoryPage.class);
+                intent.putExtra("category","Biscuits");
+                startActivity(intent);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
+            }
+        });
+        Fruits.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CategoryPage.class);
+                intent.putExtra("category","Fruits");
+                startActivity(intent);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
+            }
+        });
         return view;
     }
 }
