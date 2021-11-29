@@ -16,7 +16,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="291dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -44,7 +44,7 @@
                     android:textSize="25dp" />
 
                 <ImageButton
-                    android:id="@+id/imageButton9"
+                    android:id="@+id/submit"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="50dp"
@@ -61,46 +61,12 @@
                 android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="188dp"
+                    android:layout_width="match_parent"
                     android:layout_height="187dp"
-                    android:layout_marginLeft="10dp"
+
                     android:background="@drawable/all_round"
                     android:backgroundTint="@color/white"
-                    app:cardCornerRadius="50dp" >
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/imageView6"
-                            android:layout_width="match_parent"
-                            android:layout_height="75dp"
-                            android:layout_marginTop="25dp"
-                            app:srcCompat="@drawable/ic_camera"
-                            tools:ignore="VectorDrawableCompat" />
-
-                        <TextView
-                            android:id="@+id/textView27"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Take Image"
-                            android:textColor="@color/lightblue"
-                            android:textSize="25dp"
-                            android:textStyle="bold"
-                            android:layout_marginLeft="25dp"
-                            />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="188dp"
-                    android:layout_height="187dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/all_round"
-                    android:backgroundTint="@color/white"
-                    app:cardCornerRadius="50dp" >
+                    app:cardCornerRadius="50dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -119,11 +85,12 @@
                             android:id="@+id/textView28"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:layout_marginLeft="20dp"
                             android:text="Import Image"
                             android:textColor="@color/lightblue"
                             android:textSize="25dp"
-                            android:textStyle="bold"
-                            android:layout_marginLeft="20dp"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
@@ -161,8 +128,9 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/Name"
                     android:layout_width="373dp"
-                    android:layout_height="100dp"
+                    android:layout_height="51dp"
                     android:layout_marginLeft="15dp"
                     android:background="@color/white"
                     android:hint="Name:"
@@ -175,8 +143,9 @@
                     android:layout_height="match_parent">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="374dp"
-                        android:layout_height="40dp"
+                        android:id="@+id/Price"
+                        android:layout_width="373dp"
+                        android:layout_height="51dp"
                         android:layout_marginLeft="15dp"
                         android:background="@color/white"
                         android:hint="Price:"
@@ -189,6 +158,7 @@
                         android:layout_height="match_parent">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/Quantity"
                             android:layout_width="373dp"
                             android:layout_height="51dp"
                             android:layout_marginLeft="15dp"
@@ -203,6 +173,7 @@
                             android:layout_height="match_parent">
 
                             <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/Description"
                                 android:layout_width="373dp"
                                 android:layout_height="127dp"
                                 android:layout_marginLeft="15dp"

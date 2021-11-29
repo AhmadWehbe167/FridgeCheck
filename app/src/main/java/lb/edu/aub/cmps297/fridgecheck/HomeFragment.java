@@ -15,9 +15,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -37,6 +40,7 @@ public class HomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
 
 
     // TODO: Rename and change types of parameters
@@ -79,6 +83,7 @@ public class HomeFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+    private FloatingActionButton add;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,6 +92,7 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -107,7 +113,14 @@ public class HomeFragment extends Fragment {
         LinearLayout fishCategoryItem = (LinearLayout) view.findViewById(R.id.FishCard);
         LinearLayout cakeCategoryItem = (LinearLayout) view.findViewById(R.id.CakeCard);
         LinearLayout biscuitsCategoryItem = (LinearLayout) view.findViewById(R.id.BiscuitsCard);
-
+        add = (FloatingActionButton) view.findViewById(R.id.addButton);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), addItem.class);
+                startActivity(intent);
+            }
+        });
         breakfastCategoryItem.setOnClickListener(
                 new View.OnClickListener() {
             @Override
@@ -192,6 +205,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         newestRecyclerView = getView().findViewById(R.id.recyclerview);
         bestRecyclerView = getView().findViewById(R.id.bestrecyclerview);
         importRecyclerView = getView().findViewById(R.id.importrecyclerview);
@@ -250,4 +264,5 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
 }

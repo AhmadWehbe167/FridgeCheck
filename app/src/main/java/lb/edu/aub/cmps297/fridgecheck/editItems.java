@@ -17,7 +17,7 @@ public class editItems extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_edit_items);
-        yes = findViewById(R.id.imageButton9);
+        yes = findViewById(R.id.submit);
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

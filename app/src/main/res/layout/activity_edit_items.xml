@@ -44,7 +44,7 @@
                     android:textSize="25dp" />
 
                 <ImageButton
-                    android:id="@+id/imageButton9"
+                    android:id="@+id/submit"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="50dp"

@@ -53,16 +53,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <ImageButton
-            android:id="@+id/filterbutton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_weight="0.7"
-            android:background="@drawable/circle_shape"
-            android:contentDescription="@string/filter_desc"
-            app:srcCompat="@drawable/ic_baseline_filter" />
-
     </LinearLayout>
 
     <ScrollView
@@ -71,8 +61,10 @@
         android:layout_marginTop="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_bar">
+        app:layout_constraintTop_toBottomOf="@id/search_bar"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             style="@style/main_layout"
@@ -82,6 +74,16 @@
             android:paddingStart="20dp"
             android:paddingEnd="5dp"
             android:paddingBottom="15dp">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/addButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="320dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:clickable="true"
+                app:srcCompat="@drawable/ic_add" />
 
             <TextView
                 android:id="@+id/Categories"
@@ -396,6 +398,7 @@
                 tools:listitem="@layout/item" />
 
         </LinearLayout>
+
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
