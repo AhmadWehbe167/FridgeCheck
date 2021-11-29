@@ -43,11 +43,12 @@
             android:layout_weight="4">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/searchBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/rounded_edges"
-                android:drawableStart="@drawable/ic_baseline_search"
 
+                android:drawableStart="@drawable/ic_baseline_search"
                 android:hint="@string/search_bar"
                 android:textSize="14sp" />
 
@@ -382,7 +383,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/imported_items"
-                android:textColor="#454545"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
