@@ -248,16 +248,20 @@ public class HomeFragment extends Fragment {
                     return;
                 }
                 for(DocumentChange dc : value.getDocumentChanges()){
-                    if(dc.getType() == DocumentChange.Type.ADDED  && dc.getDocument().get("Type").equals("Newest") && newItemArrayList.size() < 5){
-                        newItemArrayList.add(dc.getDocument().toObject(Item.class));
-                    }else if(dc.getType() == DocumentChange.Type.ADDED && dc.getDocument().get("Type").equals("BestSelling") && bestItemArrayList.size() < 5){
-                        bestItemArrayList.add(dc.getDocument().toObject(Item.class));
-                    }else if(dc.getType() == DocumentChange.Type.ADDED && dc.getDocument().get("Type").equals("Imported") && importItemArrayList.size() < 5){
-                        importItemArrayList.add(dc.getDocument().toObject(Item.class));
+                    if(dc.getDocument().get("Type") == null){
+                        System.out.println("itemName is: " + dc.getDocument().get("itemName"));
+                    }else{
+                        if(dc.getType() == DocumentChange.Type.ADDED  && dc.getDocument().get("Type").equals("Newest") && newItemArrayList.size() < 5){
+                            newItemArrayList.add(dc.getDocument().toObject(Item.class));
+                        }else if(dc.getType() == DocumentChange.Type.ADDED && dc.getDocument().get("Type").equals("BestSelling") && bestItemArrayList.size() < 5){
+                            bestItemArrayList.add(dc.getDocument().toObject(Item.class));
+                        }else if(dc.getType() == DocumentChange.Type.ADDED && dc.getDocument().get("Type").equals("Imported") && importItemArrayList.size() < 5){
+                            importItemArrayList.add(dc.getDocument().toObject(Item.class));
+                        }
+                        newItemAdapter.notifyDataSetChanged();
+                        bestItemAdapter.notifyDataSetChanged();
+                        importitemAdapter.notifyDataSetChanged();
                     }
-                    newItemAdapter.notifyDataSetChanged();
-                    bestItemAdapter.notifyDataSetChanged();
-                    importitemAdapter.notifyDataSetChanged();
                     if(progressDialog.isShowing())
                         progressDialog.dismiss();
                 }
