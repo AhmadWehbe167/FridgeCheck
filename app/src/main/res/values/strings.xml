@@ -99,4 +99,27 @@
 
     <string name="quantity">Quantity: 57</string>
     <string name="back_to_settings">back to settings</string>
+    <string-array name="Quantity">
+        <item>0-50</item>
+        <item>5-100</item>
+        <item>100-150</item>
+        <item>150-200</item>
+        <item>200-250</item>
+        <item>25-300</item>
+        <item>>300</item>
+    </string-array>
+    <string-array name="type">
+        <item>BestSelling</item>
+        <item>Imported</item>
+        <item>Newest</item>
+    </string-array>
+    <string-array name="category">
+        <item>Breakfast</item>
+        <item>Snacks</item>
+        <item>Beverages</item>
+        <item>Dairy</item>
+        <item>Fish</item>
+        <item>Cake</item>
+        <item>Biscuits</item>
+    </string-array>
 </resources>
