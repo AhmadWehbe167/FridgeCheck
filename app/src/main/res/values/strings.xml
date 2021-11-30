@@ -99,6 +99,11 @@
 
     <string name="quantity">Quantity: 57</string>
     <string name="back_to_settings">back to settings</string>
+    <string name="add_item">Add Item</string>
+    <string name="import_image">Import Image</string>
+    <string name="uploadname">Name:</string>
+    <string name="priceupload">Price:</string>
+    <string name="descriptionupload">Description:</string>
     <string-array name="Quantity">
         <item>0-50</item>
         <item>5-100</item>
@@ -121,5 +126,6 @@
         <item>Fish</item>
         <item>Cake</item>
         <item>Biscuits</item>
+        <item>Fruits</item>
     </string-array>
 </resources>
