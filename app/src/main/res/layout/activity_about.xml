@@ -48,7 +48,7 @@
             android:layout_height="83dp" />
 
         <ImageView
-            android:id="@+id/imageView10"
+            android:id="@+id/uploadImage"
             android:layout_width="match_parent"
             android:layout_height="270dp"
             app:srcCompat="@drawable/logo" />
