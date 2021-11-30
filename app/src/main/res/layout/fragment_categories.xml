@@ -19,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
+            android:id="@+id/categoryback"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_gravity="center"
@@ -42,8 +43,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="0dp"
-        android:layout_height="590dp"
+        android:layout_width="410dp"
+        android:layout_height="541dp"
         android:layout_marginBottom="-35dp"
         app:cardCornerRadius="40dp"
         app:cardElevation="5dp"
@@ -54,9 +55,9 @@
         <ScrollView
             android:id="@+id/container_scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="544dp"
             android:background="@color/white"
-            android:paddingBottom="55dp" >
+            android:paddingBottom="55dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -81,6 +82,7 @@
                             android:id="@+id/breakfastCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
                             app:cardBackgroundColor="@color/blue"
                             app:cardCornerRadius="20dp"
                             app:cardElevation="5dp"
@@ -102,6 +104,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
                             android:text="@string/breakfast"
                             android:textAlignment="center"
                             android:textSize="16sp">
@@ -208,6 +211,7 @@
                             android:id="@+id/FishCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
                             app:cardBackgroundColor="@color/blue"
                             app:cardCornerRadius="20dp"
                             app:cardElevation="5dp"
@@ -229,6 +233,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
                             android:text="@string/Fish"
                             android:textAlignment="center"
                             android:textSize="18sp">
@@ -335,6 +340,7 @@
                             android:id="@+id/BiscuitsCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
                             app:cardBackgroundColor="@color/blue"
                             app:cardCornerRadius="20dp"
                             app:cardElevation="5dp"
@@ -356,6 +362,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
                             android:text="@string/Biscuits"
                             android:textAlignment="center"
                             android:textSize="18sp">

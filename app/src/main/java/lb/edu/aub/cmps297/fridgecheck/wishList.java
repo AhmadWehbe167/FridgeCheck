@@ -14,7 +14,7 @@ public class wishList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_wish_list2);
-        back = findViewById(R.id.imageButton3);
+        back = findViewById(R.id.backwishlist);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

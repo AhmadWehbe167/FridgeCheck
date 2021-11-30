@@ -49,4 +49,16 @@
 
     </androidx.cardview.widget.CardView>
 
+    <ImageButton
+        android:id="@+id/categoryPageback"
+        android:layout_width="59dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/lightblue"
+        app:layout_constraintBottom_toBottomOf="@+id/categoryTitle"
+        app:layout_constraintEnd_toStartOf="@+id/categoryTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_arrow" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

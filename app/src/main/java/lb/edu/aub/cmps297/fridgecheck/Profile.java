@@ -27,6 +27,7 @@ import java.util.Objects;
 public class Profile extends AppCompatActivity {
 
     private ImageView back;
+    private TextView name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +43,7 @@ public class Profile extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        TextView displayName = (TextView) findViewById(R.id.textView10);
+        name=findViewById(R.id.textView10);
         TextView displayEmail = (TextView) findViewById(R.id.textView9);
         displayEmail.setText(userEmail);
 

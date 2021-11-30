@@ -43,15 +43,15 @@
                 android:textSize="26dp" />
         </LinearLayout>
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="83dp" />
+
         <ImageView
             android:id="@+id/imageView10"
             android:layout_width="match_parent"
             android:layout_height="270dp"
             app:srcCompat="@drawable/logo" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="61dp" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -80,14 +80,6 @@
                     android:textColor="@color/Navyblue"
                     android:textSize="20dp" />
 
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="match_parent"
-                    android:layout_height="107dp"
-                    android:gravity="center"
-                    android:text="@string/alltext"
-                    android:textColor="@color/Navyblue"
-                    android:textSize="15dp" />
             </LinearLayout>
         </ScrollView>
 

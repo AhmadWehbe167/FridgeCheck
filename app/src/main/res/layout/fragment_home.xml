@@ -76,16 +76,6 @@
             android:paddingEnd="5dp"
             android:paddingBottom="15dp">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/addButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="320dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/white"
-                android:clickable="true"
-                app:srcCompat="@drawable/ic_add" />
-
             <TextView
                 android:id="@+id/Categories"
                 android:layout_width="wrap_content"
@@ -360,15 +350,33 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item" />
 
-            <TextView
-                android:id="@+id/BestSelling"
-                android:layout_width="wrap_content"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/addButton"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/Best_Selling"
-                android:textColor="#454545"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:layout_gravity="end|bottom"
+                android:layout_marginLeft="320dp"
+
+                android:layout_marginTop="-100dp"
+                android:background="@color/lightblue"
+                android:backgroundTint="@color/lightblue"
+                android:clickable="true"
+                app:srcCompat="@drawable/ic_baseline_add_24" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="85dp">
+
+                <TextView
+                    android:id="@+id/BestSelling"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Best_Selling"
+                    android:textColor="#454545"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </Space>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/bestrecyclerview"

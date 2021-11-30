@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import java.util.zip.Inflater;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link WishlistFragment#newInstance} factory method to
@@ -28,6 +30,7 @@ public class WishlistFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ImageButton back;
 
     public WishlistFragment() {
         // Required empty public constructor
@@ -49,6 +52,7 @@ public class WishlistFragment extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+
     }
 
     @Override
@@ -58,6 +62,7 @@ public class WishlistFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
 
     }
 
@@ -76,6 +81,14 @@ public class WishlistFragment extends Fragment {
                 ((Activity) getActivity()).overridePendingTransition(0, 0);
             }
         });
+//        back.findViewById(R.id.backwishlist);
+//        back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
         return view;
     }
 }
