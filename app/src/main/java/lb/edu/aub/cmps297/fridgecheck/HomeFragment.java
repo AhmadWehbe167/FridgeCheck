@@ -217,6 +217,7 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager horizontalLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager horizontalLayoutManager3 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+
         newestRecyclerView.setLayoutManager(horizontalLayoutManager);
         bestRecyclerView.setLayoutManager(horizontalLayoutManager2);
         importRecyclerView.setLayoutManager(horizontalLayoutManager3);
