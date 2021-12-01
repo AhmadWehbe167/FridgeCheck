@@ -51,23 +51,26 @@
 
             <ImageView
                 android:id="@+id/itemImage"
-                android:layout_width="409dp"
-                android:layout_height="177dp"
-                android:background="@drawable/all_round"
-                app:srcCompat="@drawable/reeses" />
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="105dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="398dp"
-                    android:layout_height="103dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/itemname"
+                        android:id="@+id/itemName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/grey"
@@ -77,23 +80,38 @@
                         android:textColor="@color/black"
                         android:textSize="20dp" />
 
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/all_round"
+                            android:gravity="center"
+                            android:text="Quantity: "
+                            android:textColor="@color/black"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/itemQuantity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/all_round"
+                            android:gravity="center"
+                            android:text="50"
+                            android:textColor="@color/black"
+                            android:textSize="20dp" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
                     <TextView
-                        android:id="@+id/login"
+                        android:id="@+id/itemDesc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/all_round"
-                        android:backgroundTint="@color/grey"
-                        android:gravity="center"
-                        android:text="@string/quantity"
-                        android:textColor="@color/black"
-                        android:textSize="20dp" />
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/all_round"
-
                         android:backgroundTint="@color/grey"
                         android:gravity="center"
                         android:text="@string/description"
@@ -101,7 +119,7 @@
                         android:textSize="15dp" />
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/itemPrice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/all_round"
@@ -121,306 +139,22 @@
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
-                android:layout_height="42dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:text="Related Products:"
                 android:textColor="@color/black"
                 android:textSize="20dp" />
 
-            <HorizontalScrollView
-                android:layout_width="410dp"
-                android:layout_height="192dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="150dp"
-                        android:layout_height="180dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="5dp"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="5dp"
-                        app:cardMaxElevation="5dp"
-                        app:cardPreventCornerOverlap="true">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:id="@+id/orangeImage"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_margin="10dp"
-                                android:layout_weight="1"
-                                android:contentDescription="@string/Oranges"
-                                app:srcCompat="@drawable/oranges" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal"
-                                android:paddingStart="15dp"
-                                android:paddingEnd="15dp">
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="5dp"
-                                    android:layout_weight="2"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:id="@+id/Oranges"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/Oranges"
-                                        android:textColor="#000000"
-                                        android:textSize="18sp" />
-
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal">
-
-                                        <TextView
-                                            android:id="@+id/stock"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginEnd="5dp"
-                                            android:text="@string/stock"
-                                            android:textColor="#000000" />
-
-                                        <TextView
-                                            android:id="@+id/orangesNumber"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_weight="1"
-                                            android:text="@string/two_hundred"
-                                            android:textColor="#55CCFF"
-                                            android:textStyle="bold" />
-                                    </LinearLayout>
-
-                                    <TextView
-                                        android:id="@+id/orangesPrice"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/twenty_thou"
-                                        android:textColor="#55CCFF"
-                                        android:textStyle="bold" />
-
-                                </LinearLayout>
-
-                                <ImageButton
-                                    android:id="@+id/favourite"
-                                    style="@style/heartStyle"
-                                    android:layout_weight="0.5"
-                                    android:contentDescription="@string/heart"
-                                    app:srcCompat="@drawable/ic_baseline_empty_heart" />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="150dp"
-                        android:layout_height="180dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="5dp"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="5dp"
-                        app:cardMaxElevation="5dp"
-                        app:cardPreventCornerOverlap="true">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:id="@+id/orangeImage2"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_margin="10dp"
-                                android:layout_weight="1"
-                                android:contentDescription="@string/Oranges"
-                                app:srcCompat="@drawable/oranges" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal"
-                                android:paddingStart="15dp"
-                                android:paddingEnd="15dp">
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="5dp"
-                                    android:layout_weight="2"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:id="@+id/Oranges2"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/Oranges"
-                                        android:textColor="#000000"
-                                        android:textSize="18sp" />
-
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal">
-
-                                        <TextView
-                                            android:id="@+id/stock2"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginEnd="5dp"
-                                            android:text="@string/stock"
-                                            android:textColor="#000000" />
-
-                                        <TextView
-                                            android:id="@+id/orangesNumber2"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_weight="1"
-                                            android:text="@string/two_hundred"
-                                            android:textColor="#55CCFF"
-                                            android:textStyle="bold" />
-                                    </LinearLayout>
-
-                                    <TextView
-                                        android:id="@+id/orangesPrice2"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/twenty_thou"
-                                        android:textColor="#55CCFF"
-                                        android:textStyle="bold" />
-
-                                </LinearLayout>
-
-                                <ImageButton
-                                    android:id="@+id/favourite2"
-                                    style="@style/heartStyle"
-                                    android:layout_weight="0.5"
-                                    android:contentDescription="@string/heart"
-                                    app:srcCompat="@drawable/ic_baseline_empty_heart" />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="150dp"
-                        android:layout_height="180dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="5dp"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="5dp"
-                        app:cardMaxElevation="5dp"
-                        app:cardPreventCornerOverlap="true">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:id="@+id/orangeImage3"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_margin="10dp"
-                                android:layout_weight="1"
-                                android:contentDescription="@string/Oranges"
-                                app:srcCompat="@drawable/oranges" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal"
-                                android:paddingStart="15dp"
-                                android:paddingEnd="15dp">
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="5dp"
-                                    android:layout_weight="2"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:id="@+id/Oranges3"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/Oranges"
-                                        android:textColor="#000000"
-                                        android:textSize="18sp" />
-
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal">
-
-                                        <TextView
-                                            android:id="@+id/stock3"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginEnd="5dp"
-                                            android:text="@string/stock"
-                                            android:textColor="#000000" />
-
-                                        <TextView
-                                            android:id="@+id/orangesNumber3"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_weight="1"
-                                            android:text="@string/two_hundred"
-                                            android:textColor="#55CCFF"
-                                            android:textStyle="bold" />
-                                    </LinearLayout>
-
-                                    <TextView
-                                        android:id="@+id/orangesPrice3"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/twenty_thou"
-                                        android:textColor="#55CCFF"
-                                        android:textStyle="bold" />
-
-                                </LinearLayout>
-
-                                <ImageButton
-                                    android:id="@+id/favourite3"
-                                    style="@style/heartStyle"
-                                    android:layout_weight="0.5"
-                                    android:contentDescription="@string/heart"
-                                    app:srcCompat="@drawable/ic_baseline_empty_heart" />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-                </LinearLayout>
-            </HorizontalScrollView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/relatedRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item" />
 
         </LinearLayout>
     </ScrollView>
