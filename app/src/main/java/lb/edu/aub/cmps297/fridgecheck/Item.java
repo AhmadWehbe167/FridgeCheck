@@ -1,6 +1,7 @@
 package lb.edu.aub.cmps297.fridgecheck;
 
 public class Item {
+    String uid;
     String Image;
     String Type;
     String category;
@@ -9,9 +10,18 @@ public class Item {
     String stock;
     int price;
 
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
     public Item(){}
 
-    public Item(String image, String type, String category, String description, String itemName, String stock, int price) {
+    public Item(String uid, String image, String type, String category, String description, String itemName, String stock, int price) {
+        this.uid = uid;
         this.Image = image;
         this.Type = type;
         this.category = category;

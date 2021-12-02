@@ -87,7 +87,10 @@ public class CategoryPage extends AppCompatActivity {
                 }
                 for(DocumentChange dc : value.getDocumentChanges()){
                     if(dc.getDocument().get("category").equals(category)){
-                        arrayList.add(dc.getDocument().toObject(Item.class));
+                        Item snap = dc.getDocument().toObject(Item.class);
+                        String uid = dc.getDocument().getId();
+                        snap.setUid(uid);
+                        arrayList.add(snap);
                     }
                     itemAdapter.notifyDataSetChanged();
                     if(progressDialog.isShowing())

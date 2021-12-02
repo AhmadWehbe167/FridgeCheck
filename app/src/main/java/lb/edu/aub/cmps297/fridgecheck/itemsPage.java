@@ -47,12 +47,15 @@ public class itemsPage extends AppCompatActivity {
     private String stock;
     private String description;
     private String category;
+    private String type;
+    private String uid;
 
     private ImageView itemImage;
     private TextView itemTitle;
     private TextView itemQuantity;
     private TextView itemDesc;
     private TextView itemPrice;
+//    private Bitmap imageBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +67,8 @@ public class itemsPage extends AppCompatActivity {
         itemQuantity = findViewById(R.id.itemQuantity);
         itemDesc = findViewById(R.id.itemDesc);
         itemPrice = findViewById(R.id.itemPrice);
-
+        back = findViewById(R.id.imageButton4);
+        wish = findViewById(R.id.imageButton5);
         edit = findViewById(R.id.edit);
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,8 +76,6 @@ public class itemsPage extends AppCompatActivity {
                 openEdit();
             }
         });
-        back = findViewById(R.id.imageButton4);
-        wish = findViewById(R.id.imageButton5);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,9 +93,12 @@ public class itemsPage extends AppCompatActivity {
             itemName = extras.getString("itemName");
             Image = extras.getString("Image");
             stock = extras.getString("stock");
-            price = extras.getString("price") + " L.L.";
+            price = extras.getString("price");
             description = extras.getString("description");
             category = extras.getString("category");
+            type = extras.getString("Type");
+            uid = extras.getString("uid");
+
             StorageReference mStorageRef = FirebaseStorage.getInstance().getReference().child(category +"/"+ Image);
             final File localFile;
             try {
@@ -101,8 +106,8 @@ public class itemsPage extends AppCompatActivity {
                 mStorageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        itemImage.setImageBitmap(bitmap);
+                        Bitmap imageBitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        itemImage.setImageBitmap(imageBitmap);
                     }
                 });
             } catch (IOException e) {
@@ -111,7 +116,8 @@ public class itemsPage extends AppCompatActivity {
             itemTitle.setText(itemName);
             itemQuantity.setText(stock);
             itemDesc.setText(description);
-            itemPrice.setText(price);
+            String priceLB = price + " L.L.";
+            itemPrice.setText(priceLB);
         }
 
         progressDialog = new ProgressDialog(itemsPage.this);
@@ -164,6 +170,14 @@ public class itemsPage extends AppCompatActivity {
     }
     private void openEdit() {
         Intent intent = new Intent(this, editItems.class);
+        intent.putExtra("Image",Image);
+        intent.putExtra("itemName",itemName);
+        intent.putExtra("price",price);
+        intent.putExtra("stock",stock);
+        intent.putExtra("description",description);
+        intent.putExtra("category",category);
+        intent.putExtra("Type",type);
+        intent.putExtra("uid",uid);
         startActivity(intent);
     }
 }

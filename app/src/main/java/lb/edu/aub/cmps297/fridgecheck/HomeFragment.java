@@ -25,6 +25,7 @@ import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -253,11 +254,20 @@ public class HomeFragment extends Fragment {
                         System.out.println("itemName is: " + dc.getDocument().get("itemName"));
                     }else{
                         if(dc.getType() == DocumentChange.Type.ADDED  && dc.getDocument().get("Type").equals("Newest") && newItemArrayList.size() < 5){
-                            newItemArrayList.add(dc.getDocument().toObject(Item.class));
+                            Item snap = dc.getDocument().toObject(Item.class);
+                            String uid = dc.getDocument().getId();
+                            snap.setUid(uid);
+                            newItemArrayList.add(snap);
                         }else if(dc.getType() == DocumentChange.Type.ADDED && dc.getDocument().get("Type").equals("BestSelling") && bestItemArrayList.size() < 5){
-                            bestItemArrayList.add(dc.getDocument().toObject(Item.class));
+                            Item snap = dc.getDocument().toObject(Item.class);
+                            String uid = dc.getDocument().getId();
+                            snap.setUid(uid);
+                            bestItemArrayList.add(snap);
                         }else if(dc.getType() == DocumentChange.Type.ADDED && dc.getDocument().get("Type").equals("Imported") && importItemArrayList.size() < 5){
-                            importItemArrayList.add(dc.getDocument().toObject(Item.class));
+                            Item snap = dc.getDocument().toObject(Item.class);
+                            String uid = dc.getDocument().getId();
+                            snap.setUid(uid);
+                            importItemArrayList.add(snap);
                         }
                         newItemAdapter.notifyDataSetChanged();
                         bestItemAdapter.notifyDataSetChanged();
