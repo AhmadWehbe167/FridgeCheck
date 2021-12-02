@@ -1,10 +1,5 @@
 package lb.edu.aub.cmps297.fridgecheck;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,8 +10,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.api.SystemParameterRule;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,6 +39,7 @@ public class itemsPage extends AppCompatActivity {
 
     private ImageView back;
     private ImageView wish;
+    private ImageView edit;
 
     private String itemName;
     private String Image;
@@ -65,6 +65,13 @@ public class itemsPage extends AppCompatActivity {
         itemDesc = findViewById(R.id.itemDesc);
         itemPrice = findViewById(R.id.itemPrice);
 
+        edit = findViewById(R.id.edit);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openEdit();
+            }
+        });
         back = findViewById(R.id.imageButton4);
         wish = findViewById(R.id.imageButton5);
         back.setOnClickListener(new View.OnClickListener() {
@@ -153,6 +160,10 @@ public class itemsPage extends AppCompatActivity {
     }
     public void openWish(){
         Intent intent = new Intent(this, WishlistFragment.class);
+        startActivity(intent);
+    }
+    private void openEdit() {
+        Intent intent = new Intent(this, editItems.class);
         startActivity(intent);
     }
 }

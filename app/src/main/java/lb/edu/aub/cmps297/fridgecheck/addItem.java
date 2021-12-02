@@ -1,10 +1,5 @@
 package lb.edu.aub.cmps297.fridgecheck;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,6 +10,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -99,7 +99,7 @@ public class addItem extends AppCompatActivity {
         Type.setAdapter(adapter2);
         Category.setAdapter(adapter3);
 
-        Name = findViewById(R.id.Name);
+        Name = findViewById(R.id.nameitem);
         Price = findViewById(R.id.Price);
         Price.setText("0");
         Desc = findViewById(R.id.Description);

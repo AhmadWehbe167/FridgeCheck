@@ -21,16 +21,9 @@
             android:layout_height="69dp"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/backwishlist"
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/lightblue"
-                app:srcCompat="?attr/actionModeCloseDrawable" />
-
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="251dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/wishlist"
