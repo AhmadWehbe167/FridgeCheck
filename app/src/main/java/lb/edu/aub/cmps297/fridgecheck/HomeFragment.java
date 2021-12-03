@@ -20,8 +20,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -36,17 +42,6 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     RecyclerView newestRecyclerView;
     RecyclerView bestRecyclerView;
@@ -79,8 +74,6 @@ public class HomeFragment extends Fragment {
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -89,10 +82,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
 
     }
 
@@ -199,14 +188,12 @@ public class HomeFragment extends Fragment {
                     }
                 }
         );
-
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         newestRecyclerView = getView().findViewById(R.id.recyclerview);
         bestRecyclerView = getView().findViewById(R.id.bestrecyclerview);
         importRecyclerView = getView().findViewById(R.id.importrecyclerview);
@@ -249,35 +236,59 @@ public class HomeFragment extends Fragment {
                     Log.e("Firestore error", error.getMessage());
                     return;
                 }
-                for(DocumentChange dc : value.getDocumentChanges()){
-                    if(dc.getDocument().get("Type") == null){
-                        System.out.println("itemName is: " + dc.getDocument().get("itemName"));
-                    }else{
-                        if(dc.getType() == DocumentChange.Type.ADDED  && dc.getDocument().get("Type").equals("Newest") && newItemArrayList.size() < 5){
-                            Item snap = dc.getDocument().toObject(Item.class);
-                            String uid = dc.getDocument().getId();
-                            snap.setUid(uid);
-                            newItemArrayList.add(snap);
-                        }else if(dc.getType() == DocumentChange.Type.ADDED && dc.getDocument().get("Type").equals("BestSelling") && bestItemArrayList.size() < 5){
-                            Item snap = dc.getDocument().toObject(Item.class);
-                            String uid = dc.getDocument().getId();
-                            snap.setUid(uid);
-                            bestItemArrayList.add(snap);
-                        }else if(dc.getType() == DocumentChange.Type.ADDED && dc.getDocument().get("Type").equals("Imported") && importItemArrayList.size() < 5){
-                            Item snap = dc.getDocument().toObject(Item.class);
-                            String uid = dc.getDocument().getId();
-                            snap.setUid(uid);
-                            importItemArrayList.add(snap);
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                DocumentReference docRef = db.collection("Users").document(user.getUid());
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                User userData = document.toObject(User.class);
+                                ArrayList<String> wishlist = userData.getWishlist();
+                                for(DocumentChange dc : value.getDocumentChanges()){
+                                    if(dc.getDocument().get("Type") == null){
+                                        System.out.println("itemName is: " + dc.getDocument().get("itemName"));
+                                    }else{
+                                        if(dc.getType() == DocumentChange.Type.ADDED  && dc.getDocument().get("Type").equals("Newest") && newItemArrayList.size() < 5){
+                                            Item snap = dc.getDocument().toObject(Item.class);
+                                            String uid = dc.getDocument().getId();
+                                            snap.setUid(uid);
+                                            if(wishlist.contains(uid))
+                                                snap.setFav(true);
+                                            newItemArrayList.add(snap);
+                                        }else if(dc.getType() == DocumentChange.Type.ADDED && dc.getDocument().get("Type").equals("BestSelling") && bestItemArrayList.size() < 5){
+                                            Item snap = dc.getDocument().toObject(Item.class);
+                                            String uid = dc.getDocument().getId();
+                                            snap.setUid(uid);
+                                            if(wishlist.contains(uid))
+                                                snap.setFav(true);
+                                            bestItemArrayList.add(snap);
+                                        }else if(dc.getType() == DocumentChange.Type.ADDED && dc.getDocument().get("Type").equals("Imported") && importItemArrayList.size() < 5){
+                                            Item snap = dc.getDocument().toObject(Item.class);
+                                            String uid = dc.getDocument().getId();
+                                            snap.setUid(uid);
+                                            if(wishlist.contains(uid))
+                                                snap.setFav(true);
+                                            importItemArrayList.add(snap);
+                                        }
+                                        newItemAdapter.notifyDataSetChanged();
+                                        bestItemAdapter.notifyDataSetChanged();
+                                        importitemAdapter.notifyDataSetChanged();
+                                    }
+                                    if(progressDialog.isShowing())
+                                        progressDialog.dismiss();
+                                }
+                            } else {
+                                Log.e("","No such document");
+                            }
+                        } else {
+                            Log.e("","get failed with ", task.getException());
                         }
-                        newItemAdapter.notifyDataSetChanged();
-                        bestItemAdapter.notifyDataSetChanged();
-                        importitemAdapter.notifyDataSetChanged();
                     }
-                    if(progressDialog.isShowing())
-                        progressDialog.dismiss();
-                }
+                });
+
             }
         });
     }
-
 }

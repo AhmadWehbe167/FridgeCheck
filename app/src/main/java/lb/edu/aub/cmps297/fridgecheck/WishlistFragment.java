@@ -1,20 +1,32 @@
 package lb.edu.aub.cmps297.fridgecheck;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
-import androidx.cardview.widget.CardView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
-import java.util.zip.Inflater;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,14 +34,15 @@ import java.util.zip.Inflater;
  * create an instance of this fragment.
  */
 public class WishlistFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
+    RecyclerView RecyclerView;
+    ArrayList<Item> ItemArrayList;
+    WishlistAdapter wishlistAdapter;
+    FirebaseFirestore db;
+    ProgressDialog progressDialog;
+
     private ImageButton back;
 
     public WishlistFragment() {
@@ -58,37 +71,86 @@ public class WishlistFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Fetching Data ...");
+        progressDialog.show();
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_wishlist, container, false);
-        CardView card =(CardView) view.findViewById(R.id.Reeses);
+        return view;
+    }
 
-        card.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        RecyclerView = getView().findViewById(R.id.wishlistRecycler);
+        RecyclerView.setHasFixedSize(true);
+        db = FirebaseFirestore.getInstance();
+        ItemArrayList = new ArrayList<Item>();
+        wishlistAdapter = new WishlistAdapter(getActivity(), ItemArrayList);
+        RecyclerView.setAdapter(wishlistAdapter);
+        EventChangeListener();
+
+    }
+
+    private void EventChangeListener() {
+        db.collection("Items").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), itemsPage.class);
-                startActivity(intent);
-                ((Activity) getActivity()).overridePendingTransition(0, 0);
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(error != null){
+                    if(progressDialog.isShowing())
+                        progressDialog.dismiss();
+                    Log.e("Firestore error", error.getMessage());
+                    return;
+                }
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                DocumentReference docRef = db.collection("Users").document(user.getUid());
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                User userData = document.toObject(User.class);
+                                ArrayList<String> wishlist = userData.getWishlist();
+                                for(DocumentChange dc : value.getDocumentChanges()){
+                                    if(dc.getDocument().get("Type") == null){
+                                        System.out.println("itemName is: " + dc.getDocument().get("itemName"));
+                                    } else {
+                                        String uid = dc.getDocument().getId();
+                                        if(dc.getType() == DocumentChange.Type.ADDED && wishlist.contains(uid)){
+                                            Item snap = dc.getDocument().toObject(Item.class);
+                                            snap.setUid(uid);
+                                            if(wishlist.contains(uid))
+                                                snap.setFav(true);
+                                            ItemArrayList.add(snap);
+                                        }else if(dc.getType() == DocumentChange.Type.REMOVED){
+                                            Item snap = dc.getDocument().toObject(Item.class);
+                                            snap.setUid(uid);
+                                            if(wishlist.contains(uid))
+                                                snap.setFav(true);
+                                            ItemArrayList.remove(snap);
+                                        }
+                                        wishlistAdapter.notifyDataSetChanged();
+                                    }
+                                    if(progressDialog.isShowing())
+                                        progressDialog.dismiss();
+                                }
+                            } else {
+                                Log.e("","No such document");
+                            }
+                        } else {
+                            Log.e("","get failed with ", task.getException());
+                        }
+                    }
+                });
+
             }
         });
-//        back.findViewById(R.id.backwishlist);
-//        back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), MainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-        return view;
     }
 }

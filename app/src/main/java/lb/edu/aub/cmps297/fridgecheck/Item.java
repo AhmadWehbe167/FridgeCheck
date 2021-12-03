@@ -8,7 +8,16 @@ public class Item {
     String description;
     String itemName;
     String stock;
+    Boolean isFav = false;
     int price;
+
+    public Boolean getFav() {
+        return isFav;
+    }
+
+    public void setFav(Boolean fav) {
+        isFav = fav;
+    }
 
     public void setUid(String uid) {
         this.uid = uid;
@@ -20,8 +29,9 @@ public class Item {
 
     public Item(){}
 
-    public Item(String uid, String image, String type, String category, String description, String itemName, String stock, int price) {
+    public Item(Boolean isFav, String uid, String image, String type, String category, String description, String itemName, String stock, int price) {
         this.uid = uid;
+        this.isFav= isFav;
         this.Image = image;
         this.Type = type;
         this.category = category;

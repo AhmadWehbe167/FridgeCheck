@@ -97,22 +97,7 @@ public class Register extends AppCompatActivity {
                         userMap.put("Name", Name);
                         userMap.put("Wishlist", empty);
                         userMap.put("isAdmin", false );
-                        db.collection("Users")
-                                .add(userMap)
-                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                    @Override
-                                    public void onSuccess(DocumentReference documentReference) {
-                                        System.out.println("DocumentSnapshot added with ID: "+ documentReference.getId());
-//                                        startActivity(new Intent(Register.this, HomeFragment.class));
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        System.out.println("Error adding document"+ e);
-                                    }
-                                });
-
+                        db.collection("Users").document(userID).set(userMap);
                     } else {
                         Toast.makeText(Register.this, "Registration Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }

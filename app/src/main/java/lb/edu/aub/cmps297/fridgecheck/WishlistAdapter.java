@@ -4,13 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -33,26 +33,26 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {
+public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyViewHolder> {
 
     Context context;
     ArrayList<Item> itemArrayList;
     private StorageReference mStorageRef;
 
-    public ItemAdapter(FragmentActivity context, ArrayList<Item> itemArrayList) {
+    public WishlistAdapter(FragmentActivity context, ArrayList<Item> itemArrayList) {
         this.context = context;
         this.itemArrayList = itemArrayList;
     }
 
     @NonNull
     @Override
-    public ItemAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.item, parent, false);
+    public WishlistAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(context).inflate(R.layout.wishlistcard, parent, false);
         return new MyViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull WishlistAdapter.MyViewHolder holder, int position) {
         Item item = itemArrayList.get(position);
         mStorageRef = FirebaseStorage.getInstance().getReference().child(item.category +"/"+ item.Image);
         try {
@@ -91,48 +91,31 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
                 context.startActivity(intent);
             }
         });
-        if(item.isFav){
-            holder.favouriteButton.setImageResource(R.drawable.ic_heart);
-        }
-        holder.favouriteButton.setOnClickListener(new View.OnClickListener() {
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            DocumentReference docRef = FirebaseFirestore.getInstance().collection("Users").document(user.getUid());
+        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(item.isFav){
-                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            DocumentSnapshot document = task.getResult();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                DocumentReference docRef = FirebaseFirestore.getInstance().collection("Users").document(user.getUid());
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot document = task.getResult();
+                        if(document.exists()){
                             User userData = document.toObject(User.class);
                             ArrayList<String> wishlist = userData.getWishlist();
                             wishlist.remove(item.uid);
                             docRef.update("Wishlist", wishlist).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    holder.favouriteButton.setImageResource(R.drawable.ic_baseline_empty_heart);
+                                    itemArrayList.remove(position);
+                                    WishlistAdapter.this.notifyDataSetChanged();
                                 }
                             });
+                        }else{
+                            Log.e("Tagged Error", "An error occured");
                         }
-                    });
-                }else{
-                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            DocumentSnapshot document = task.getResult();
-                            User userData = document.toObject(User.class);
-                            ArrayList<String> wishlist = userData.getWishlist();
-                            wishlist.add(item.uid);
-                            docRef.update("Wishlist", wishlist).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    holder.favouriteButton.setImageResource(R.drawable.ic_heart);
-                                }
-                            });
-                        }
-                    });
-                }
-
+                    }
+                });
             }
         });
     }
@@ -145,7 +128,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         ImageView itemImage;
         TextView itemTitle, itemStockNumber, itemPrice;
-        ImageButton favouriteButton;
+        ImageButton deleteButton;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -153,7 +136,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
             itemTitle = itemView.findViewById(R.id.itemTitle);
             itemStockNumber = itemView.findViewById(R.id.itemStockNumber);
             itemPrice = itemView.findViewById(R.id.itemPrice);
-            favouriteButton = itemView.findViewById(R.id.favouriteButton);
+            deleteButton = itemView.findViewById(R.id.deleteButton);
         }
     }
 }

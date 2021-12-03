@@ -1,5 +1,6 @@
 package lb.edu.aub.cmps297.fridgecheck;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -15,7 +16,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -32,6 +39,7 @@ public class CategoryPage extends AppCompatActivity {
     int numberOfColumns = 2;
     FirebaseFirestore db;
     ImageButton back;
+    private ArrayList<String> wishlist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,17 +93,38 @@ public class CategoryPage extends AppCompatActivity {
                     Log.e("Firestore error", error.getMessage());
                     return;
                 }
-                for(DocumentChange dc : value.getDocumentChanges()){
-                    if(dc.getDocument().get("category").equals(category)){
-                        Item snap = dc.getDocument().toObject(Item.class);
-                        String uid = dc.getDocument().getId();
-                        snap.setUid(uid);
-                        arrayList.add(snap);
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                DocumentReference docRef = db.collection("Users").document(user.getUid());
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()){
+                                User userData = document.toObject(User.class);
+                                ArrayList<String> wishlist = userData.getWishlist();
+                                for(DocumentChange dc : value.getDocumentChanges()){
+                                    if(dc.getDocument().get("category").equals(category)){
+                                        Item snap = dc.getDocument().toObject(Item.class);
+                                        String uid = dc.getDocument().getId();
+                                        snap.setUid(uid);
+                                        if(wishlist.contains(uid))
+                                            snap.setFav(true);
+                                        arrayList.add(snap);
+                                    }
+                                    itemAdapter.notifyDataSetChanged();
+                                    if(progressDialog.isShowing())
+                                        progressDialog.dismiss();
+                                }
+
+                            }else{
+                                Log.e("","No such document");
+                            }
+                        }else{
+                            Log.e("","get failed with ", task.getException());
+                        }
                     }
-                    itemAdapter.notifyDataSetChanged();
-                    if(progressDialog.isShowing())
-                        progressDialog.dismiss();
-                }
+                });
             }
         });
     }

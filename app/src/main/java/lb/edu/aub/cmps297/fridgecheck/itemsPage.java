@@ -10,13 +10,20 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -55,6 +62,7 @@ public class itemsPage extends AppCompatActivity {
     private TextView itemQuantity;
     private TextView itemDesc;
     private TextView itemPrice;
+    private ArrayList<String> wishlist;
 //    private Bitmap imageBitmap;
 
     @Override
@@ -134,7 +142,6 @@ public class itemsPage extends AppCompatActivity {
         RecyclerView.setAdapter(ItemAdapter);
         EventChangeListener();
     }
-
     private void EventChangeListener() {
         db.collection("Items").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -145,18 +152,41 @@ public class itemsPage extends AppCompatActivity {
                     Log.e("Firestore error", error.getMessage());
                     return;
                 }
-                for(DocumentChange dc : value.getDocumentChanges()){
-                    if(dc.getDocument().get("Type") == null){
-                        System.out.println("itemName is: " + dc.getDocument().get("itemName"));
-                    }else{
-                        if(dc.getType() == DocumentChange.Type.ADDED  && dc.getDocument().get("category").equals(category) && !dc.getDocument().get("itemName").equals(itemName) && ItemArrayList.size() < 5){
-                            ItemArrayList.add(dc.getDocument().toObject(Item.class));
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                DocumentReference docRef = db.collection("Users").document(user.getUid());
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                User userData = document.toObject(User.class);
+                                ArrayList<String> wishlist = userData.getWishlist();
+                                for(DocumentChange dc : value.getDocumentChanges()){
+                                    if(dc.getDocument().get("Type") == null){
+                                        System.out.println("itemName is: " + dc.getDocument().get("itemName"));
+                                    }else{
+                                        if(dc.getType() == DocumentChange.Type.ADDED  && dc.getDocument().get("category").equals(category) && !dc.getDocument().get("itemName").equals(itemName) && ItemArrayList.size() < 5){
+                                            Item snap = dc.getDocument().toObject(Item.class);
+                                            String uid = dc.getDocument().getId();
+                                            snap.setUid(uid);
+                                            if(wishlist.contains(uid))
+                                                snap.setFav(true);
+                                            ItemArrayList.add(snap);
+                                        }
+                                        ItemAdapter.notifyDataSetChanged();
+                                    }
+                                    if(progressDialog.isShowing())
+                                        progressDialog.dismiss();
+                                }
+                            } else {
+                                Log.e("","No such document");
+                            }
+                        } else {
+                            Log.e("","get failed with ", task.getException());
                         }
-                        ItemAdapter.notifyDataSetChanged();
                     }
-                    if(progressDialog.isShowing())
-                        progressDialog.dismiss();
-                }
+                });
             }
         });
     }
