@@ -19,24 +19,29 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
-
-        //setup for navigation bar
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        navController = Navigation.findNavController(this, R.id.fragment2);
-        NavigationUI.setupWithNavController(bottomNavigationView, navController);
         mAuth= FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user == null){
+            startActivity(new Intent(MainActivity.this, Login.class));
+        } else {
+//            mAuth.signOut();
+            setContentView(R.layout.activity_main);
+            getSupportActionBar().hide();
 
+            //setup for navigation bar
+            bottomNavigationView = findViewById(R.id.bottomNavigationView);
+            navController = Navigation.findNavController(this, R.id.fragment2);
+            NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser user = mAuth.getCurrentUser();
-        if(user==null){
-            System.out.println("User is null");
-            startActivity(new Intent(MainActivity.this, Login.class));
-        }
+//        FirebaseUser user = mAuth.getCurrentUser();
+//        if(user==null){
+//            System.out.println("User is null");
+//            startActivity(new Intent(MainActivity.this, Login.class));
+//        }
     }
 }
