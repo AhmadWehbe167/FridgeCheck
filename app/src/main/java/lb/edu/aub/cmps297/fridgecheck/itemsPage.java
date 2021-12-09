@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
@@ -63,6 +65,7 @@ public class itemsPage extends AppCompatActivity {
     private TextView itemDesc;
     private TextView itemPrice;
     private ArrayList<String> wishlist;
+    private ImageView delete;
 //    private Bitmap imageBitmap;
 
     @Override
@@ -78,6 +81,24 @@ public class itemsPage extends AppCompatActivity {
         back = findViewById(R.id.imageButton4);
         wish = findViewById(R.id.imageButton5);
         edit = findViewById(R.id.edit);
+        delete = findViewById(R.id.deletebutton);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DocumentReference docRef = FirebaseFirestore.getInstance().collection("Users").document(user.getUid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()){
+                        User userData = document.toObject(User.class);
+                        if (!userData.getIsAdmin()){
+                            edit.setVisibility(View.INVISIBLE);
+                            delete.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                }
+            }
+        });
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,6 +148,20 @@ public class itemsPage extends AppCompatActivity {
             String priceLB = price + " L.L.";
             itemPrice.setText(priceLB);
         }
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseFirestore.getInstance().collection("Items").document(uid).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Intent intent = new Intent(itemsPage.this, MainActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(itemsPage.this, "Item Deleted successfully!", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+
 
         progressDialog = new ProgressDialog(itemsPage.this);
         progressDialog.setCancelable(false);

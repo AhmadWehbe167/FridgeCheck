@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -98,6 +99,24 @@ public class HomeFragment extends Fragment {
         LinearLayout cakeCategoryItem = (LinearLayout) view.findViewById(R.id.CakeCard);
         LinearLayout biscuitsCategoryItem = (LinearLayout) view.findViewById(R.id.BiscuitsCard);
         add = (FloatingActionButton) view.findViewById(R.id.addButton);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DocumentReference docRef = FirebaseFirestore.getInstance().collection("Users").document(user.getUid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()){
+                        User userData = document.toObject(User.class);
+                        if (!userData.getIsAdmin()){
+                            add.hide();
+                        }
+                    }
+                }
+            }
+        });
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
