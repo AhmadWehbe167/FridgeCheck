@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="lb.edu.aub.cmps297.fridgecheck">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FridgeCheck">
-        <activity android:name=".wishList">
-        </activity>
+        <activity android:name=".SearchPage"></activity>
+        <activity android:name=".wishList"></activity>
         <activity android:name=".Login" />
         <activity android:name=".CategoryPage" />
         <activity

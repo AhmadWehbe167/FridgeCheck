@@ -37,23 +37,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
-        <com.google.android.material.textfield.TextInputLayout
+        <Button
+            android:id="@+id/searchBar"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/searchBox"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/rounded_edges"
-
-                android:drawableStart="@drawable/ic_baseline_search"
-                android:hint="@string/search_bar"
-                android:textSize="14sp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center|start"
+            android:text="@string/search_bar"
+            android:textColor="#000000"
+            app:backgroundTint="#FFFFFF"
+            app:cornerRadius="10dp" />
     </LinearLayout>
 
     <ScrollView
@@ -338,9 +332,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="320dp"
                 android:background="@color/lightblue"
-                app:fabSize="normal"
                 android:backgroundTint="@color/lightblue"
                 android:clickable="true"
+                app:fabSize="normal"
                 app:srcCompat="@drawable/ic_baseline_add_24" />
 
             <TextView
@@ -363,14 +357,14 @@
 
 
             <TextView
-                    android:id="@+id/BestSelling"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/Best_Selling"
-                    android:textColor="#454545"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                android:id="@+id/BestSelling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/Best_Selling"
+                android:textColor="#454545"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
 
             <androidx.recyclerview.widget.RecyclerView
